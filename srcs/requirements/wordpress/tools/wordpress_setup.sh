@@ -18,7 +18,7 @@ wp user create $WP_USER_NAME \
 				$WP_USER_EMAIL \
 				--user_pass=$WP_USER_PASS
 
-wp option update home $WP_URL
-wp option update siteurl $WP_URL
+wp option update home $SITE_URL
+wp option update siteurl $SITE_URL
 
 php-fpm82 -F
