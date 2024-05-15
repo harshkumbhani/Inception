@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3.8'
 
 services:
   nginx:
@@ -9,6 +9,11 @@ services:
       - "443:443"
     networks:
       - inception
+    volumes:
+      - wordpress:/var/www/wordpress
+    depends_on:
+      wordpress:
+        condition: service_healthy
     restart: always
 
   mariadb:
@@ -19,7 +24,48 @@ services:
       - .env
     networks:
       - inception
+    volumes:
+      - database:/var/lib/mysql
     restart: always
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    
+  wordpress:
+    container_name: wordpress
+    build: ./requirements/wordpress/
+    image: wordpress
+    env_file:
+      - .env
+    networks:
+      - inception
+    volumes:
+      - wordpress:/var/www/wordpress
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    restart: always
+    healthcheck:
+      test: ["CMD", "wp", "core", "is-installed"]
+      interval: 2s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  database:
+    name: ${MARIADB_VOLUME}
+    driver_opts:
+      type: none
+      device: ${PWD}/data/database
+      o: bind
+  wordpress:
+    name: ${WP_VOLUME}
+    driver_opts:
+      type: none
+      device: ${PWD}/data/wordpress
+      o: bind
 
 networks:
   inception:
