@@ -2,15 +2,20 @@ FROM alpine:3.19
 
 RUN apk update && \
 	apk add wget curl php82 php82-fpm \
-	php82-json php82-zip php82-pdo_mysql \ 
-	php82-mysqli php82-curl \
-	php82-dom php82-exif \
-	php82-fileinfo php82-intl \
-	php82-mbstring php82-openssl \
-	php82-phar php82-tokenizer \
-	php82-ctype php82-xml \
-	php82-zip php82-cli \
-	php82-pdo
+	php82-mysqli php82-pdo_mysql \
+	php82-json \ 
+	php82-curl \
+	php82-zip \
+	php82-xml \
+	php82-dom \
+	php82-mbstring \
+	php82-openssl \
+	php82-phar \
+	php82-fileinfo \
+	php82-exif \
+	php82-intl \
+	php82-ctype \
+	php82-session
 
 WORKDIR /var/www/wordpress
 
