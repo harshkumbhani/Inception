@@ -9,6 +9,7 @@ RUN apk update && \
 	php82-xml \
 	php82-dom \
 	php82-mbstring \
+	php82-gd \
 	php82-openssl \
 	php82-phar \
 	php82-fileinfo \
@@ -28,5 +29,8 @@ RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.ph
     wp core download --path=/var/www/wordpress --version=6.5.2
 
 RUN sed -i "s/listen = 127.0.0.1:9000/listen = 0.0.0.0:9000/" /etc/php82/php-fpm.d/www.conf
+RUN chown -R nobody:nobody /var/log/php82
+RUN chown -R nobody:nobody /var/www/wordpress
+USER nobody
 EXPOSE 9000
 CMD [ "wordpress_setup.sh" ]
