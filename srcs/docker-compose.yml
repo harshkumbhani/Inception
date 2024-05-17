@@ -65,13 +65,13 @@ volumes:
     name: ${MARIADB_VOLUME}
     driver_opts:
       type: none
-      device: ${PWD}/data/database
+      device: /home/hkumbhan/data/database
       o: bind
   wordpress:
     name: ${WP_VOLUME}
     driver_opts:
       type: none
-      device: ${PWD}/data/wordpress
+      device: /home/hkumbhan/data/wordpress
       o: bind
 
 networks:

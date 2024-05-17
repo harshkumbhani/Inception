@@ -37,7 +37,7 @@ fclean: down cleanimages cleanvolume
 	@docker system prune -f
 
 reset: fclean
-	cd srcs/data/ && rm -rf database wordpress && \
+	cd /home/hkumbhan/data/ && rm -rf database wordpress && \
 	mkdir database wordpress
 
 
