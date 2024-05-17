@@ -16,7 +16,7 @@ services:
         condition: service_healthy
     restart: always
     healthcheck:
-      test: ["CMD", "curl", "-kf", "https://localhost/"]
+      test: ["CMD", "curl", "-kf", "https://hkumbhan.42.fr/"]
       interval: 5s
       timeout: 3s
       retries: 5
@@ -35,7 +35,7 @@ services:
       - database:/var/lib/mysql
     restart: always
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "hkumbhan.42.fr"]
       interval: 5s
       timeout: 3s
       retries: 5
