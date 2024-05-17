@@ -39,7 +39,7 @@ services:
       interval: 5s
       timeout: 3s
       retries: 5
-    
+
   wordpress:
     container_name: wordpress
     build: ./requirements/wordpress/
